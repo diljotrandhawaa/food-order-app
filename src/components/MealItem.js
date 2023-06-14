@@ -1,15 +1,14 @@
 
 import React from 'react';
 import classes from './MealItem.module.css';
-import MealItemForm from './MealItemForm';
 
-const MealItem = () => {
+const MealItem = (props) => {
     return (
         <div className={classes.meal}>
             <div>
-                <h3>Sushi</h3>
-                <p className={classes.descriptiono}>Finest fish and veggies</p>
-                <h3 className={classes.price}>$22.99</h3>
+                <h3>{props.name}</h3>
+                <p className={classes.description}>{props.description}</p>
+                <h3 className={classes.price}>{props.price}</h3>
             </div>
         </div>
     )
