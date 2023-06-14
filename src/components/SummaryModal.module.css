@@ -1,0 +1,15 @@
+
+.summary {
+    width: 50%;
+    margin: auto;
+    padding: 0.5rem;
+    color: #fff;
+    text-align: center;
+    background-color: rgb(25, 74, 74);
+    border-radius: 8px;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    z-index: 1;
+    top: 35%;
+    left: 25%;
+}
