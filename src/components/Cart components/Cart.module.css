@@ -1,0 +1,8 @@
+
+.cart {
+    z-index: 4;
+    position: absolute;
+    top: 150px;
+    left: 30%;
+    width: 40%;
+}

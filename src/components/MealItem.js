@@ -10,9 +10,9 @@ const MealItem = (props) => {
         const mealInfo = {
             name: props.name,
             price: props.price,
-            quantity: mealQuantity
+            amount: mealQuantity
         }
-        console.log(mealInfo)
+        props.onMealAddition(mealInfo);
     }
 
     return (
