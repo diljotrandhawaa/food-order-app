@@ -44,7 +44,7 @@ const Cart = (props) => {
 
     return (
         <React.Fragment>
-        <div className={classes.backdrop}></div>
+        <div className={classes.backdrop} onClick={props.onCancelBtn}></div>
         <Card className={classes.cart}>
             { props.meals.map((meal) => {
                 return <CartItem name={meal.name} price={meal.price} amount={meal.amount} onAddMeal={addMealHandler}
