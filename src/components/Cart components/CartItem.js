@@ -1,12 +1,19 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import classes from './CartItem.module.css';
 
 const CartItem = (props) => {
 //   const price = `$${props.price.toFixed(2)}`;
 
-console.log(props.name);
-console.log(props.amount)
+  // const [mealNumber, changeMealNumber] = useState(props.amount);
+
+  const onMealAddHandler = () => {
+    props.onAddMeal(props.name)
+  }
+
+  const onMealRemoveHandler = () => {
+    props.onRemoveMeal(props.name)
+  }
 
   return (
     <li className={classes['cart-item']}>
@@ -18,8 +25,8 @@ console.log(props.amount)
         </div>
       </div>
       <div className={classes.actions}>
-        <button onClick={props.onRemove}>−</button>
-        <button onClick={props.onAdd}>+</button>
+        <button onClick={onMealRemoveHandler}>−</button>
+        <button onClick={onMealAddHandler}>+</button>
       </div>
     </li>
   );

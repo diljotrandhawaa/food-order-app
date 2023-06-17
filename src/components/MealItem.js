@@ -3,16 +3,20 @@ import React from 'react';
 import classes from './MealItem.module.css';
 import MealItemForm from './MealItemForm';
 
+var id = 1;
+
 const MealItem = (props) => {
 
     const addMealHandler = (mealNum) => {
         const mealQuantity = mealNum;
         const mealInfo = {
+            id: id,
             name: props.name,
             price: props.price,
             amount: mealQuantity
         }
         props.onMealAddition(mealInfo);
+        id++;
     }
 
     return (

@@ -21,23 +21,49 @@ function App() {
 
   const [cartMeals, changeCartMeals] = useState(addedMeals);
 
-  const [cartBtnIsClicked, changeIfCartClicked] = useState(false);
+  const [cartIsOpen, changeCartIsOpen] = useState(false);
 
   const cartBtnClickHandler = () => {
-    console.log('cart btn is clickeds')
-    changeIfCartClicked(true);
+    changeCartIsOpen(true);
   }
 
   const mealAddHandler = (info) => {
 
+    var infoIsUnique = true;
+
+    var dummyCartMeals = [...cartMeals];
+
+    for (var meal of dummyCartMeals) {
+      if (meal.name === info.name) {
+        meal.amount = (Number(meal.amount) + Number(info.amount)).toString();
+        infoIsUnique = false;
+        break;
+      }
+    }
+
+    if (!infoIsUnique) {
+      changeCartMeals(dummyCartMeals);
+      return;
+    }
+
     changeCartMeals((prevMeals) => {
       return [...prevMeals, info];
-    })
+    });
+
+    console.log(cartMeals)
+  }
+
+  const cartCancelBtnHandler = () => {
+    changeCartIsOpen(false);
+  }
+
+  const cartOrderBtnHandler = () => {
+    console.log('ordering.......')
   }
 
   return (
     <div className='app'>
-      { cartBtnIsClicked && <Cart meals={cartMeals} /> }
+      { cartIsOpen && <Cart meals={cartMeals} onCancelBtn={cartCancelBtnHandler} onOrderBtn={cartOrderBtnHandler} /> }
       <Header onCartBtnClicked={cartBtnClickHandler} />
       <SummaryModal />
       <MealsList allMeals={meals} onMealAdd={mealAddHandler} />
