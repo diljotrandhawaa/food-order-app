@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Card from '../UI/Card';
 import CartItem from './CartItem';
 
@@ -10,12 +10,6 @@ const Cart = (props) => {
     var cartMeals = [...props.meals];
 
     const [meals, changeMeals] = useState(cartMeals);
-
-    var totalAmount = 0;
-
-    for (var meal of props.meals) {
-        totalAmount += Number(meal.price.substring(1)) * Number(meal.amount);
-    }
 
     const addMealHandler = (mealName) => {
 
@@ -35,18 +29,27 @@ const Cart = (props) => {
             if (meal.name === mealName && Number(meal.amount) > 1) {
                 meal.amount--;
                 break;
-            } else if (meal.name === mealName && Number(meal.amount) === 0) {
+            } else if (meal.name === mealName && Number(meal.amount) <= 1) {
+                dummyMeals.splice(dummyMeals.indexOf(meal), 1);
                 console.log('meal will be removed this way!');
+                break;
             }
         }
+        console.log(dummyMeals)
         changeMeals(dummyMeals);
+    }
+
+    var totalAmount = 0;
+    
+    for (var meal of meals) {
+        totalAmount += Number(meal.price.substring(1)) * Number(meal.amount);
     }
 
     return (
         <React.Fragment>
         <div className={classes.backdrop} onClick={props.onCancelBtn}></div>
         <Card className={classes.cart}>
-            { props.meals.map((meal) => {
+            { meals.map((meal) => {
                 return <CartItem name={meal.name} price={meal.price} amount={meal.amount} onAddMeal={addMealHandler}
                 onRemoveMeal={removeMealHandler} 
                 />
