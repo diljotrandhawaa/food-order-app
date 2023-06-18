@@ -64,7 +64,7 @@ function App() {
   return (
     <div className='app'>
       { cartIsOpen && <Cart meals={cartMeals} onCancelBtn={cartCancelBtnHandler} onOrderBtn={cartOrderBtnHandler} /> }
-      <Header onCartBtnClicked={cartBtnClickHandler} />
+      <Header onCartBtnClicked={cartBtnClickHandler} meals={cartMeals}/>
       <SummaryModal />
       <MealsList allMeals={meals} onMealAdd={mealAddHandler} />
     </div>

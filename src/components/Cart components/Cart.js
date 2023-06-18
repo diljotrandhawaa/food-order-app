@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
 import Card from '../UI/Card';
 import CartItem from './CartItem';
 
@@ -45,24 +46,34 @@ const Cart = (props) => {
         totalAmount += Number(meal.price.substring(1)) * Number(meal.amount);
     }
 
+    const Backdrop = () => {
+        return <div className={classes.backdrop} onClick={props.onCancelBtn}></div>
+    }
+
+    const Overlay = () => {
+        return (
+            <Card className={classes.cart}>
+                { meals.map((meal) => {
+                    return <CartItem name={meal.name} price={meal.price} amount={meal.amount} onAddMeal={addMealHandler}
+                    onRemoveMeal={removeMealHandler} 
+                    />
+                }) }
+                <div className={classes.total}>
+                    <h1>Total Amount</h1>
+                    <h2>${totalAmount.toFixed(2)}</h2>
+                </div>
+                <div className={classes.actions}>
+                    <button className={classes.cancelBtn} onClick={props.onCancelBtn}>Close</button>
+                    <button className={classes.orderBtn} onClick={props.onOrderBtn}>Order</button>
+                </div>
+            </Card>
+        )
+    }
+
     return (
         <React.Fragment>
-        <div className={classes.backdrop} onClick={props.onCancelBtn}></div>
-        <Card className={classes.cart}>
-            { meals.map((meal) => {
-                return <CartItem name={meal.name} price={meal.price} amount={meal.amount} onAddMeal={addMealHandler}
-                onRemoveMeal={removeMealHandler} 
-                />
-            }) }
-            <div className={classes.total}>
-                <h1>Total Amount</h1>
-                <h2>${totalAmount.toFixed(2)}</h2>
-            </div>
-            <div className={classes.actions}>
-                <button className={classes.cancelBtn} onClick={props.onCancelBtn}>Close</button>
-                <button className={classes.orderBtn} onClick={props.onOrderBtn}>Order</button>
-            </div>
-        </Card>
+            { ReactDOM.createPortal(<Backdrop />, document.getElementById('overlays')) }
+            { ReactDOM.createPortal(<Overlay />, document.getElementById('overlays')) }
         </React.Fragment>
     )
 };

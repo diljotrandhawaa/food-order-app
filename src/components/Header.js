@@ -1,8 +1,9 @@
 
 import React from 'react';
 import classes from './Header.module.css';
-import CartIcon from './UI/CartIcon';
 import HeaderCartButton from './UI/HeaderCartButton';
+
+import mealsImage from '../assets/meals.jpeg';
 
 const Header = (props) => {
 
@@ -14,10 +15,10 @@ const Header = (props) => {
         <React.Fragment>
             <div className={classes.header}>
                 <h1>ReactMeals</h1>
-                <HeaderCartButton className={classes['cart-btn']} onClick={cartClickHandler} />
+                <HeaderCartButton className={classes['cart-btn']} onClick={cartClickHandler} meals={props.meals} />
             </div>
             <div className={classes['main-image']}>
-                <img src='https://github.com/academind/react-complete-guide-code/blob/11-practice-food-order-app/extra-files/meals.jpg?raw=true' ></img>
+                <img src={mealsImage} alt='meals-img' ></img>
             </div>
         </React.Fragment>
     )
